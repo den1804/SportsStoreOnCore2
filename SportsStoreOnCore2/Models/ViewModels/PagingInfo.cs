@@ -11,6 +11,6 @@ namespace SportsStoreOnCore2.Models.ViewModels
         public int ItemsPerPage { get; set; }
         public int CurrentPage { get; set; }
 
-        public int ToTalPages => (int)Math.Ceiling((decimal)TotalItems / ItemsPerPage);
+        public int TotalPages => (int)Math.Ceiling((decimal)TotalItems / ItemsPerPage);
     }
 }
