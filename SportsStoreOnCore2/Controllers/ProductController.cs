@@ -11,7 +11,7 @@ namespace SportsStoreOnCore2.Controllers
     public class ProductController : Controller 
     {
         private IProductRepository repository;
-        public int PageSize = 4;
+        public int PageSize = 7;
 
         public ProductController(IProductRepository repo)
         {
@@ -23,8 +23,8 @@ namespace SportsStoreOnCore2.Controllers
             return View(new ProductsListViewModel {
                 Products = repository.Products
                     .OrderBy(p => p.ProductId)
-                    .Skip((productPage - 1) * PageSize).
-                    Take(PageSize),
+                    .Skip((productPage - 1) * PageSize)
+                    .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = productPage,
