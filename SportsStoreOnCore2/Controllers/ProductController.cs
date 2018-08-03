@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SportsStoreOnCore2.Controllers
 {
-    public class ProductController : Controller 
+    public class ProductController : Controller
     {
         private IProductRepository repository;
         public int PageSize = 7;
@@ -18,10 +18,12 @@ namespace SportsStoreOnCore2.Controllers
             repository = repo;
         }
 
-        public ViewResult List(int productPage = 1)
+        public ViewResult List(string category, int productPage = 1)
         {
-            return View(new ProductsListViewModel {
+            return View(new ProductsListViewModel
+            {
                 Products = repository.Products
+                    .Where(p => category == null || p.Category == category)
                     .OrderBy(p => p.ProductId)
                     .Skip((productPage - 1) * PageSize)
                     .Take(PageSize),
@@ -30,7 +32,8 @@ namespace SportsStoreOnCore2.Controllers
                     CurrentPage = productPage,
                     ItemsPerPage = PageSize,
                     TotalItems = repository.Products.Count()
-                }
+                },
+                CurrentCategory = category
             });
         }
     }

@@ -44,9 +44,24 @@ namespace SportsStoreOnCore2
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "pagination",
-                    template: "products/page{productPage}",
-                    defaults: new { Controller = "Product", action = "List" });
+                   name: null,
+                   template: "{category}/page{productPage:int}",
+                   defaults: new { controller = "Product", action = "List" });
+
+                routes.MapRoute(
+                    name: null,
+                    template: "page{productPage:int}",
+                    defaults: new { controller = "Product", action = "List", productPage = 1 });
+
+                routes.MapRoute(
+                    name: null,
+                    template: "{category}",
+                    defaults: new { controller = "Product", action = "List", productPage = 1 });
+
+                routes.MapRoute(
+                    name: null,
+                    template: "",
+                    defaults: new { controller = "Product", action = "List", productPage = 1 });
 
                 routes.MapRoute(
                     name: "default",
