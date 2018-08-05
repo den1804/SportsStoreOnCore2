@@ -11,7 +11,7 @@ namespace SportsStoreOnCore2.Controllers
     public class ProductController : Controller
     {
         private IProductRepository repository;
-        public int PageSize = 7;
+        public int PageSize = 3;
 
         public ProductController(IProductRepository repo)
         {
@@ -31,7 +31,7 @@ namespace SportsStoreOnCore2.Controllers
                 {
                     CurrentPage = productPage,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Products.Count()
+                    TotalItems = category == null ? repository.Products.Count() : repository.Products.Where(p => p.Category == category).Count()
                 },
                 CurrentCategory = category
             });
