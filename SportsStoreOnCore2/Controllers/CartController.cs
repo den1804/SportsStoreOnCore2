@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using SportsStoreOnCore2.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using SportsStoreOnCore2.Infrastructure;
+using SportsStoreOnCore2.Models.ViewModels;
 
 namespace SportsStoreOnCore2.Controllers
 {
@@ -15,6 +14,10 @@ namespace SportsStoreOnCore2.Controllers
         public CartController(IProductRepository repo)
         {
             repository = repo;
+        }
+        public ViewResult Index(string returnUrl)
+        {
+            return View(new CartIndexViewModel { Cart = GetCart(), ReturnUrl = returnUrl });
         }
         public RedirectToActionResult AddToCart(int productId, string returnUrl)
         {
